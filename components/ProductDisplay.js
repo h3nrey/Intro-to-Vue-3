@@ -36,9 +36,15 @@ app.component('product-display', {
           class="button" 
           :class="{ disabledButton: !inStock }" 
           :disabled="!inStock" 
-          v-on:click="addToCart">
+          v-on:click="changeCart('add-to-cart')">
           Add to Cart
         </button>
+
+        <button 
+        class="button"
+        :class="{ diabledButton: !inStock}"
+        :disabled="!inStock"
+        v-on:click="changeCart('remove-to-cart')"> Remove to Cart</button>
       </div>
     </div>
   </div>`,
@@ -55,8 +61,12 @@ app.component('product-display', {
     }
   },
   methods: {
-      addToCart() {
-          this.cart += 1
+      // addToCart() {
+      //     this.$emit("add-to-cart", this.variants[this.selectedVariant].id);
+      // },
+      changeCart(triggerName) {
+        console.log(triggerName);
+        this.$emit(triggerName, this.variants[this.selectedVariant].id)
       },
       updateVariant(index) {
           this.selectedVariant = index
